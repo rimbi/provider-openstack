@@ -25,6 +25,11 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal openstack credentials as JSON"
+
+	keyUserName = "user_name"
+	keyPassword = "password"
+	keyTenantId = "tenant_id"
+	keyRegion   = "region"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -67,6 +72,19 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			"username": creds["username"],
 			"password": creds["password"],
 		}*/
+		ps.Configuration = map[string]any{}
+		if v, ok := creds[keyUserName]; ok {
+			ps.Configuration[keyUserName] = v
+		}
+		if v, ok := creds[keyPassword]; ok {
+			ps.Configuration[keyPassword] = v
+		}
+		if v, ok := creds[keyTenantId]; ok {
+			ps.Configuration[keyTenantId] = v
+		}
+		if v, ok := creds[keyRegion]; ok {
+			ps.Configuration[keyRegion] = v
+		}
 		return ps, nil
 	}
 }
