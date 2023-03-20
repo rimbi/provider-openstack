@@ -1,0 +1,13 @@
+apiVersion: instancev2s.compute.openstack.upbound.io/v1alpha1
+kind: InstanceV2
+metadata:
+  name: hello-compute
+spec:
+  forProvider:
+    description: "Managed with Crossplane OpenStack Provider (generated with Upjet)"
+    visibility: public
+    template:
+      - owner: upbound
+        repository: upjet-provider-template
+  providerConfigRef:
+    name: default

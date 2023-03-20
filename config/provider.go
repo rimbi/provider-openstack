@@ -9,6 +9,7 @@ import (
 	_ "embed"
 
 	"github.com/rimbi/provider-openstack/config/compute"
+	"github.com/rimbi/provider-openstack/config/volume"
 	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
@@ -34,6 +35,7 @@ func GetProvider() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		compute.Configure,
+		volume.Configure,
 	} {
 		configure(pc)
 	}

@@ -28,8 +28,10 @@ const (
 
 	keyUserName = "user_name"
 	keyPassword = "password"
-	keyTenantId = "tenant_id"
-	keyRegion   = "region"
+	keyAuthUrl = "auth_url"
+	keyUserDomainName = "user_domain_name"
+	keyProjectDomainName = "project_domain_name"
+	keyTenantName = "tenant_name"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -79,11 +81,17 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if v, ok := creds[keyPassword]; ok {
 			ps.Configuration[keyPassword] = v
 		}
-		if v, ok := creds[keyTenantId]; ok {
-			ps.Configuration[keyTenantId] = v
+		if v, ok := creds[keyAuthUrl]; ok {
+			ps.Configuration[keyAuthUrl] = v
 		}
-		if v, ok := creds[keyRegion]; ok {
-			ps.Configuration[keyRegion] = v
+		if v, ok := creds[keyUserDomainName]; ok {
+			ps.Configuration[keyUserDomainName] = v
+		}
+		if v, ok := creds[keyProjectDomainName]; ok {
+			ps.Configuration[keyProjectDomainName] = v
+		}
+		if v, ok := creds[keyTenantName]; ok {
+			ps.Configuration[keyTenantName] = v
 		}
 		return ps, nil
 	}
